@@ -1,0 +1,19 @@
+tables
+- cards
+- users
+
+Table 1: cards
+columns
+id - number 
+title - string
+content - string
+
+Table 2: users
+columns
+user_id - number (auto-increments)
+username - string
+email - string
+password - hashed string
+created_at - timestamp
+updated_at - timestamp
+

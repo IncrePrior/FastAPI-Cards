@@ -21,3 +21,9 @@ def newCard(card: NewCard, db: Session = Depends(get_db)):
     db.commit()
     db.refresh(new_card)
     return new_card
+
+@app.get("/card")
+def allCards(db: Session = Depends(get_db)):
+    cards = db.query(models.Cards).all()
+    return cards
+
