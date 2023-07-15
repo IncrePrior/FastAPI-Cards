@@ -1,4 +1,4 @@
-from fastapi import FastAPI, Depends, Request, Form, status, Response
+from fastapi import FastAPI, Depends, Request, Form, status, Response, HTTPException
 from pydantic import BaseModel
 from database_config.connection import Base, engine, get_db
 from database_config import models
@@ -27,12 +27,13 @@ def allCards(db: Session = Depends(get_db)):
     cards = db.query(models.Cards).all()
     return cards
 
-@app.get("/card/{id}", status_code=200)
+@app.get("/card/{id}")
 def getCardById(id, response: Response, db: Session = Depends(get_db)):
     card = db.query(models.Cards).filter(models.Cards.id == id).first()
     if not card: 
-        response.status_code = status.HTTP_404_NOT_FOUND
-        return{"Sorry": f"There's no card with id {id}."}
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Sorry. There's no card with id {id}.")
+        # response.status_code = status.HTTP_404_NOT_FOUND
+        # return{"Sorry": f"There's no card with id {id}."}
     
     return card
 
