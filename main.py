@@ -14,7 +14,7 @@ app = FastAPI()
 def home():
     return {"welcome": "Hi. So good to see you here."}
 
-@app.post("/card")
+@app.post("/card", status_code=status.HTTP_201_CREATED)
 def newCard(card: NewCard, db: Session = Depends(get_db)):
     new_card = models.Cards(title=card.title, text=card.text)    
     db.add(new_card)
@@ -31,3 +31,7 @@ def allCards(db: Session = Depends(get_db)):
 def getCardById(id, db: Session = Depends(get_db)):
     card = db.query(models.Cards).filter(models.Cards.id == id).first()
     return card
+
+# @app.get("/card/{text}")
+# @app.delete("/")
+# @app.put("/card")
