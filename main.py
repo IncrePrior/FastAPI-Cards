@@ -27,3 +27,7 @@ def allCards(db: Session = Depends(get_db)):
     cards = db.query(models.Cards).all()
     return cards
 
+@app.get("/card/{id}")
+def getCardById(id, db: Session = Depends(get_db)):
+    card = db.query(models.Cards).filter(models.Cards.id == id).first()
+    return card
