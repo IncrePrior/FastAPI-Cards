@@ -5,7 +5,7 @@ from database_config import models
 from sqlalchemy.orm import Session
 
 from schemas.CardsSchemas import Card
-from schemas.UserSchemas import User
+from schemas.UserSchemas import User, ShowUser
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -64,12 +64,20 @@ def deleteCardById(id: int, db: Session = Depends(get_db)):
     del Cards[id]
     return {"Message": f"Card ID {id} deleted."}
 
-# internal server error 500 on Swagger UI 
-@app.post("/user", response_model=User)
-def addUser(user: User, db: Session = Depends(get_db)):
-    new_user = models.Users(name=user.name, email=user.email, password=user.password)    
+# internal server error 500 on Swagger UI but entries are registered on PgAdmin
+@app.post("/user", response_model=ShowUser)
+def addUser(user: ShowUser, db: Session = Depends(get_db)):
+    new_user = models.User(name=user.name, email=user.email)    
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
     return new_user
+
+# internal server error 500 on Swagger UI 
+@app.get("/user/{user_id}", response_model=ShowUser)
+def getUserById(user_id: int, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+    if not user: 
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Cannot find user with id {user_id}.")
+    return user
 
