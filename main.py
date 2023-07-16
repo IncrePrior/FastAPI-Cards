@@ -7,7 +7,7 @@ from sqlalchemy.orm import Session
 from schemas.CardsSchemas import Card
 from schemas.UserSchemas import User
 
-models.Base.metadata.create_all(bind=engine)
+models.Base.metadata.create_all(engine)
 
 app = FastAPI()
 
@@ -64,6 +64,7 @@ def deleteCardById(id: int, db: Session = Depends(get_db)):
     del Cards[id]
     return {"Message": f"Card ID {id} deleted."}
 
+# internal server error 500 on Swagger UI 
 @app.post("/user", response_model=User)
 def addUser(user: User, db: Session = Depends(get_db)):
     new_user = models.Users(name=user.name, email=user.email, password=user.password)    
