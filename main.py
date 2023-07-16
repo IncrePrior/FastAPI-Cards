@@ -7,13 +7,16 @@ from sqlalchemy.orm import Session
 from schemas.CardsSchemas import Card
 from schemas.UserSchemas import User, ShowUser
 
+from origins import origins
+from from fastapi.middleware.cors import CORSMiddleware
+
 models.Base.metadata.create_all(bind=engine)
 
 description = """
-Cards Against Negativity helps you beat self-doubt and builds positive vibes.
+Cards Against Negativity helps you beat self-doubt and fill you with positive vibes.
 
 You will be able to: 
-- create cards with positive vibes
+- create cards of positive energy
 - read cards and remember how wonderful you are
 """
 
@@ -26,6 +29,14 @@ app = FastAPI(
         "URL" : "cardsagainstnegativity.com",
         "email" : "negativenomore@positivevibesonly.co.uk"}
     )
+
+app.add_middleware(
+    CORSMiddleware,
+    allow_origins=origins,
+    allow_credentials=True,
+    allow_methods=["*"],
+    allow_headers=["*"],
+)
 
 @app.get("/")
 def home():
