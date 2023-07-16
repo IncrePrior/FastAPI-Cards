@@ -3,6 +3,8 @@ from pydantic import BaseModel, validator
 class Card(BaseModel):
     title: str
     text: str
+    class Config():
+        orm_mode = True
     
 @validator('title')
 def check_for_max_80_chars(cls, v):

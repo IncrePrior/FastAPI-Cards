@@ -4,6 +4,14 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+    class Config():
+        orm_mode = True
+
+class ShowUser(BaseModel):
+    name: str
+    email: str
+    class Config():
+        orm_mode = True
     
 @validator('name')
 def check_for_max_300_chars(cls, v):
