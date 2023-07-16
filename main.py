@@ -8,7 +8,7 @@ from schemas.CardsSchemas import Card
 from schemas.UserSchemas import User, ShowUser
 
 from origins import origins
-from from fastapi.middleware.cors import CORSMiddleware
+from fastapi.middleware.cors import CORSMiddleware
 
 models.Base.metadata.create_all(bind=engine)
 
