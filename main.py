@@ -38,15 +38,15 @@ def getCardById(id, response: Response, db: Session = Depends(get_db)):
     return card
 
 @app.delete("/card/{id}", status_code=status.HTTP_204_NO_CONTENT)
-def deleteCard(id, db: Session = Depends(get_db)):
+def deleteCardById(id, db: Session = Depends(get_db)):
     db.query(models.Cards).filter(models.Cards.id == id).delete(synchronize_session=False)
     db.commit()
-    return {f"Card with {id} has been deleted."}
+    return {f"Card ID {id} been deleted."}
 
 @app.put("/card/{id}", status_code=status.HTTP_202_ACCEPTED)
 def editCardById(id, card: NewCard, db: Session = Depends(get_db)):
-    db.query(models.Cards).filter(models.Cards.id == id).update(request)
+    db.query(models.Cards).filter(models.Cards.id == id).update(request, synchronize_session=False)
     db.commit()
-    return 'updated'
+    return card
 
 # @app.get("/card/{text}")
