@@ -1,6 +1,6 @@
 from pydantic import BaseModel, validator
 
-class NewCard(BaseModel):
+class Card(BaseModel):
     title: str
     text: str
     
