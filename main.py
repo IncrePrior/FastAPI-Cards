@@ -27,7 +27,7 @@ def allCards(db: Session = Depends(get_db)):
     cards = db.query(models.Cards).all()
     return cards
 
-@app.get("/card/{id}")
+@app.get("/card/{id}", status_code=status.HTTP_200_OK)
 def getCardById(id, response: Response, db: Session = Depends(get_db)):
     card = db.query(models.Cards).filter(models.Cards.id == id).first()
     if not card: 
@@ -37,6 +37,16 @@ def getCardById(id, response: Response, db: Session = Depends(get_db)):
     
     return card
 
+@app.delete("/card/{id}", status_code=status.HTTP_204_NO_CONTENT)
+def deleteCard(id, db: Session = Depends(get_db)):
+    db.query(models.Cards).filter(models.Cards.id == id).delete(synchronize_session=False)
+    db.commit()
+    return {f"Card with {id} has been deleted."}
+
+@app.put("/card/{id}", status_code=status.HTTP_202_ACCEPTED)
+def editCardById(id, card: NewCard, db: Session = Depends(get_db)):
+    db.query(models.Cards).filter(models.Cards.id == id).update(request)
+    db.commit()
+    return 'updated'
+
 # @app.get("/card/{text}")
-# @app.delete("/")
-# @app.put("/card")
