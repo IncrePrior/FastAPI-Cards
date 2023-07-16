@@ -9,3 +9,9 @@ class Cards(Base):
     title = Column(String)
     text = Column(String)
     
+class Users(Base): 
+    __tablename__ = "users"
+    user_id = Column(Integer, primary_key=True, index=True)
+    name = Column(String)
+    email = Column(String)
+    password = Column(String)

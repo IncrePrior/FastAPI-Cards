@@ -5,6 +5,7 @@ from database_config import models
 from sqlalchemy.orm import Session
 
 from schemas.CardsSchemas import Card
+from schemas.UserSchemas import User
 
 models.Base.metadata.create_all(bind=engine)
 
@@ -62,3 +63,12 @@ def deleteCardById(id: int, db: Session = Depends(get_db)):
         return {"Message": f"Sorry. Card ID {id} doesn't exist."}
     del Cards[id]
     return {"Message": f"Card ID {id} deleted."}
+
+@app.post("/user", response_model=User)
+def addUser(user: User, db: Session = Depends(get_db)):
+    new_user = models.Users(name=user.name, email=user.email, password=user.password)    
+    db.add(new_user)
+    db.commit()
+    db.refresh(new_user)
+    return new_user
+
