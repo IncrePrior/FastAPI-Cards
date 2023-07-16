@@ -8,10 +8,13 @@ class Cards(Base):
     id = Column(Integer, primary_key=True, index=True)
     title = Column(String)
     text = Column(String)
+    user_id = Column(Integer, ForeignKey(users.id))
+    author = relationship("Users", back_populates="cards")
     
 class Users(Base): 
     __tablename__ = "users"
-    user_id = Column(Integer, primary_key=True, index=True)
+    id = Column(Integer, primary_key=True, index=True)
     name = Column(String)
     email = Column(String)
     password = Column(String)
+    cards = relationship("Cards", back_populates="author")

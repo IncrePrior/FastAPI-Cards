@@ -90,10 +90,10 @@ def addUser(user: ShowUser, db: Session = Depends(get_db)):
     return new_user
 
 # internal server error 500 on Swagger UI 
-@app.get("/user/{user_id}", response_model=ShowUser, tags=['users'])
-def getUserById(user_id: int, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.user_id == user_id).first()
+@app.get("/user/{id}", response_model=ShowUser, tags=['users'])
+def getUserById(id: int, db: Session = Depends(get_db)):
+    user = db.query(models.User).filter(models.User.id == id).first()
     if not user: 
-        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Cannot find user with id {user_id}.")
+        raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Cannot find user with id {id}.")
     return user
 
