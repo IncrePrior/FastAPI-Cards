@@ -94,7 +94,7 @@ def deleteCardById(id: int, db: Session = Depends(get_db)):
 # internal server error 500 on Swagger UI but entries are registered on PgAdmin
 @app.post("/user", response_model=ShowUser, tags=['users'])
 def addUser(user: ShowUser, db: Session = Depends(get_db)):
-    new_user = models.User(name=user.name, email=user.email)    
+    new_user = models.Users(name=user.name, email=user.email)    
     db.add(new_user)
     db.commit()
     db.refresh(new_user)
@@ -103,7 +103,7 @@ def addUser(user: ShowUser, db: Session = Depends(get_db)):
 # internal server error 500 on Swagger UI 
 @app.get("/user/{id}", response_model=ShowUser, tags=['users'])
 def getUserById(id: int, db: Session = Depends(get_db)):
-    user = db.query(models.User).filter(models.User.id == id).first()
+    user = db.query(models.Users).filter(models.Users.id == id).first()
     if not user: 
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Cannot find user with id {id}.")
     return user
