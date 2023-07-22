@@ -4,12 +4,14 @@ class User(BaseModel):
     name: str
     email: str
     password: str
+    id: int
     class Config():
         orm_mode = True
 
 class ShowUser(BaseModel):
     name: str
     email: str
+    id: int
     class Config():
         orm_mode = True
     
