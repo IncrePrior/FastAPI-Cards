@@ -16,7 +16,7 @@ description = """
 Cards Against Negativity helps you beat self-doubt and fill you with positive vibes.
 
 You will be able to: 
-- create cards of positive energy
+- create cards of anything that makes you happy and proud
 - read cards and remember how wonderful you are
 """
 
@@ -25,7 +25,7 @@ app = FastAPI(
     description = description,
     summary = "An app to fight self-doubt and negative thoughts.",
     contact = {
-        "name" : "Val the perfectly imperfect coder", 
+        "name" : "Perfectly imperfect coder", 
         "URL" : "cardsagainstnegativity.com",
         "email" : "negativenomore@positivevibesonly.co.uk"}
     )
