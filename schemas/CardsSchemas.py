@@ -14,7 +14,7 @@ def check_for_max_80_chars(cls, v):
         return v
     
 @validator('text')
-def check_for_max_250_chars(cls, v):
-        if len(v) > 250 : 
+def check_for_max_300_chars(cls, v):
+        if len(v) > 300 : 
             raise ValueError('Great that you max out the 250 characters in this note. If you need more space, continue on a new note.')
         return v
