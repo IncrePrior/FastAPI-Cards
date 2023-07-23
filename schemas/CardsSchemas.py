@@ -9,5 +9,5 @@ class Card(BaseModel):
 @validator('text')
 def check_for_max_300_chars(cls, v):
         if len(v) > 300 : 
-            raise ValueError('Great that you max out the 250 characters in this note. If you need more space, continue on a new note.')
+            raise ValueError('Great that you max out 300 characters in this note. To continue, start a new note.')
         return v
