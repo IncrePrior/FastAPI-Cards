@@ -44,7 +44,7 @@ def home():
 
 @app.post("/card", response_model=Card, tags=['cards'])
 def newCard(card: Card, db: Session = Depends(get_db)):
-    new_card = models.Cards(title=card.title, text=card.text)    
+    new_card = models.Cards(text=card.text)    
     db.add(new_card)
     db.commit()
     db.refresh(new_card)

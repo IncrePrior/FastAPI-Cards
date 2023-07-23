@@ -6,12 +6,6 @@ class Card(BaseModel):
     class Config():
         orm_mode = True
     
-@validator('title')
-def check_for_max_80_chars(cls, v):
-        if len(v) > 80 : 
-            raise ValueError('Fab that you max out 80 characters for a title. There is more space for you to continue in the note.')
-        return v
-    
 @validator('text')
 def check_for_max_300_chars(cls, v):
         if len(v) > 300 : 
