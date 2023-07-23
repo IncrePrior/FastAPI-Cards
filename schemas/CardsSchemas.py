@@ -1,7 +1,6 @@
 from pydantic import BaseModel, validator
 
 class Card(BaseModel):
-    title: str
     text: str
     author_id: int
     class Config():

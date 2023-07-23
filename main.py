@@ -23,9 +23,9 @@ You will be able to:
 app = FastAPI(
     title = "Cards Against Negativity",
     description = description,
-    summary = "An app to fight self-doubt and negative thoughts.",
+    summary = "An app to help users fight self-doubt and grow positive energy.",
     contact = {
-        "name" : "Perfectly imperfect coder", 
+        "name" : "By Val the perfectly imperfect coder", 
         "URL" : "cardsagainstnegativity.com",
         "email" : "negativenomore@positivevibesonly.co.uk"}
     )
