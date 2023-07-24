@@ -86,9 +86,11 @@ def editCardById(id: int, card: Card, db: Session = Depends(get_db)):
 # internal server error 500 on Swagger UI 
 @app.delete("/card/{id}", tags=['cards'])
 def deleteCardById(id: int, db: Session = Depends(get_db)):
-    if id not in Card: 
+    card = db.query(models.Cards).filter(models.Cards.id == id).first()
+    if not card:
         return {"Message": f"Sorry. Card ID {id} doesn't exist."}
-    del Card[id]
+    db.delete(card)
+    db.commit()
     return {"Message": f"Card ID {id} deleted."}
 
 # internal server error 500 on Swagger UI but entries are registered on PgAdmin
