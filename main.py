@@ -65,8 +65,8 @@ def getCardById(id: int, response: Response, db: Session = Depends(get_db)):
 # TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body.
 @app.get("/card/{text}", tags=['cards'])
 def getCardByText(text: str, card: Card, db: Session = Depends(get_db)):
-    for text in Cards: 
-        if text not in Cards: 
+    for text in Card: 
+        if text not in Card: 
             return {'Message':f"Can't find card with text {text}"}
     
             if Cards[id]["text"] == text.lower():
@@ -75,20 +75,20 @@ def getCardByText(text: str, card: Card, db: Session = Depends(get_db)):
 # internal server error 500 on Swagger UI 
 @app.put("/card/{id}", tags=['cards'])
 def editCardById(id: int, card: Card, db: Session = Depends(get_db)):
-    if id not in Cards:
+    if id not in Card:
         return {'Message': f'Card ID {id} not found.'}
     if card.title != None: 
-        Cards[id].title = card.title
+        Card[id].title = card.title
     if card.text != None:
-        Cards[id].text = card.text
-    return Cards[id]
+        Card[id].text = card.text
+    return Card[id]
 
 # internal server error 500 on Swagger UI 
 @app.delete("/card/{id}", tags=['cards'])
 def deleteCardById(id: int, db: Session = Depends(get_db)):
-    if id not in Cards: 
+    if id not in Card: 
         return {"Message": f"Sorry. Card ID {id} doesn't exist."}
-    del Cards[id]
+    del Card[id]
     return {"Message": f"Card ID {id} deleted."}
 
 # internal server error 500 on Swagger UI but entries are registered on PgAdmin
