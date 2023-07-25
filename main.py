@@ -13,7 +13,7 @@ from fastapi.middleware.cors import CORSMiddleware
 models.Base.metadata.create_all(bind=engine)
 
 description = """
-Cards Against Negativity helps you beat self-doubt and fill you with positive vibes.
+Cards Against Insecurity helps you beat self-doubt and fill you with positive vibes.
 
 You will be able to: 
 - create cards of happiness and strength 
@@ -21,13 +21,13 @@ You will be able to:
 """
 
 app = FastAPI(
-    title = "Cards Against Negativity",
+    title = "Cards Against Insecurity",
     description = description,
     summary = "An app to help users fight self-doubt and grow positive energy.",
     contact = {
         "name" : "Val the wabi-sabi coder", 
-        "URL" : "cardsagainstnegativity.com",
-        "email" : "negativenomore@positivevibesonly.co.uk"}
+        "URL" : "beatselfdoubt.com",
+        "email" : "securefosho@positivevibesonly.co.uk"}
     )
 
 app.add_middleware(
