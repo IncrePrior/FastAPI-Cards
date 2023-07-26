@@ -23,7 +23,7 @@ You will be able to:
 app = FastAPI(
     title = "Cards Against Insecurity",
     description = description,
-    summary = "An app to help users fight self-doubt and grow positive energy.",
+    summary = "An app to help fight self-doubt and grow positive energy.",
     contact = {
         "name" : "Val the wabi-sabi coder", 
         "URL" : "beatselfdoubt.com",
