@@ -74,7 +74,7 @@ def getCardByText(text: str, author_id: int, card: Card, db: Session = Depends(g
     
 # internal server error 500 on Swagger UI 
 @app.put("/card/{id}", tags=['cards'])
-def editCardById(id: int, author_id: int, card: Card, db: Session = Depends(get_db)):
+def editCardById(id: int, card: Card, db: Session = Depends(get_db)):
     if id not in Card:
         return {'Message': f'Card ID {id} not found.'}
     if card.title != None: 
