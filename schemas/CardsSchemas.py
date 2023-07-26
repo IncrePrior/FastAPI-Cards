@@ -2,7 +2,6 @@ from pydantic import BaseModel, validator
 
 class Card(BaseModel):
     text: str
-    author_id: int
     class Config():
         orm_mode = True
     

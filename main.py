@@ -64,7 +64,7 @@ def getCardById(id: int, response: Response, db: Session = Depends(get_db)):
 
 # TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body.
 @app.get("/card/{text}", tags=['cards'])
-def getCardByText(text: str, author_id: int, card: Card, db: Session = Depends(get_db)):
+def getCardByText(text: str, card: Card, db: Session = Depends(get_db)):
     for text in Card: 
         if text not in Card: 
             return {'Message':f"Can't find card with text {text}"}
