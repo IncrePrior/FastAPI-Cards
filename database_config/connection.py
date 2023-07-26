@@ -2,7 +2,7 @@ from sqlalchemy import create_engine
 from sqlalchemy.ext.declarative import declarative_base
 from sqlalchemy.orm import sessionmaker
 
-SQLALCHEMY_DATABASE_URL = "postgresql://testdb_c0g2_user:jVJZs7Krg3izvJVUAbZRticKW1JWMXdR@dpg-chnr3iik728jv5d6q3q0-a.frankfurt-postgres.render.com/testdb_c0g2"
+SQLALCHEMY_DATABASE_URL = "postgresql://caidb_user:gloUA0PtjtltiZLTlukT8IEBkNxeQxx8@dpg-cj0e6ns07spl5oop44vg-a.frankfurt-postgres.render.com/caidb"
             
 engine = create_engine(SQLALCHEMY_DATABASE_URL)
 
