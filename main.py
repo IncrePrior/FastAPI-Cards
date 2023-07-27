@@ -55,6 +55,7 @@ def allCards(db: Session = Depends(get_db)):
     cards = db.query(models.Cards).all()
     return cards
 
+# WIP
 @app.get("/card/{id}", status_code=status.HTTP_200_OK, tags=['cards'])
 def getCardById(id: int, response: Response, db: Session = Depends(get_db)):
     card = db.query(models.Cards).filter(models.Cards.id == id).first()
@@ -62,7 +63,7 @@ def getCardById(id: int, response: Response, db: Session = Depends(get_db)):
         raise HTTPException(status_code=status.HTTP_404_NOT_FOUND, detail=f"Cannot find card with id {id}.")
     return card
 
-# TypeError: Failed to execute 'fetch' on 'Window': Request with GET/HEAD method cannot have body.
+# WIP
 @app.get("/card/{text}", tags=['cards'])
 def getCardByText(text: str, card: Card, db: Session = Depends(get_db)):
     for text in Card: 
@@ -72,7 +73,7 @@ def getCardByText(text: str, card: Card, db: Session = Depends(get_db)):
             if Cards[id]["text"] == text.lower():
                 return Cards[id]
     
-# internal server error 500 on Swagger UI 
+# WIP 
 @app.put("/card/{id}", tags=['cards'])
 def editCardById(id: int, card: Card, db: Session = Depends(get_db)):
     if id not in Card:
@@ -83,7 +84,7 @@ def editCardById(id: int, card: Card, db: Session = Depends(get_db)):
         Card[id].text = card.text
     return Card[id]
 
-# internal server error 500 on Swagger UI 
+# WIP 
 @app.delete("/card/{id}", tags=['cards'])
 def deleteCardById(id: int, db: Session = Depends(get_db)):
     card = db.query(models.Cards).filter(models.Cards.id == id).first()
@@ -93,7 +94,7 @@ def deleteCardById(id: int, db: Session = Depends(get_db)):
     db.commit()
     return {"Message": f"Card ID {id} deleted."}
 
-# internal server error 500 on Swagger UI but entries are registered on PgAdmin
+# WIP
 @app.post("/user", response_model=ShowUser, tags=['users'])
 def addUser(user: ShowUser, db: Session = Depends(get_db)):
     new_user = models.Users(name=user.name, email=user.email)    
@@ -102,7 +103,7 @@ def addUser(user: ShowUser, db: Session = Depends(get_db)):
     db.refresh(new_user)
     return new_user
 
-# internal server error 500 on Swagger UI 
+# WIP
 @app.get("/user/{id}", response_model=ShowUser, tags=['users'])
 def getUserById(id: int, db: Session = Depends(get_db)):
     user = db.query(models.Users).filter(models.Users.id == id).first()
